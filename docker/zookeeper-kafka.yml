@@ -1,0 +1,75 @@
+#
+# Docker images are used from Bitnami by VMWare
+#
+# To run containers in the daemon mode:
+# docker-compose -f zookeeper-kafka.yml up --build -d
+
+# To run containers with logs output:
+# docker-compose -f zookeeper-kafka.yml up --build
+
+# Check status of the containers:
+# docker-compose -f zookeeper-kafka.yml ps
+
+# Print logs from the container:
+# docker logs kafka1
+
+# Stop containers:
+# docker-compose -f zookeeper-kafka.yml down
+
+version: '2.1'
+
+services:
+
+  # zookeeper
+  zookeeper-skd:
+    image: bitnami/zookeeper:3.8.1
+    hostname: zookeeper-skd
+    container_name: zookeeper-skd
+    ports:
+      - "2181:2181"
+    networks:
+      - skd-net
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      # allow unauthenticated users to connect
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+
+  # kafka
+  kafka-skd:
+    image: bitnami/kafka:3.4.0
+    hostname: kafka-skd
+    container_name: kafka-skd
+    ports:
+      - "9092:9092"
+    depends_on:
+      - "zookeeper-skd"
+    networks:
+      - skd-net
+    environment:
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+      KAFKA_CFG_LISTENERS: "PLAINTEXT://:9092"
+      KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://localhost:9092"
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper-skd:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+      # automatically create topic called "SKD-Topic1"
+      # KAFKA_CREATE_TOPICS: "SKD-Topic1"
+
+  # kafka UI http://localhost:9000
+  kafdrop-skd:
+    image: obsidiandynamics/kafdrop:3.30.0
+    hostname: kafdrop-skd
+    container_name: kafdrop-skd
+    ports:
+      - "9000:9000"
+    depends_on:
+      - "kafka-skd"
+    networks:
+      - skd-net
+    environment:
+      KAFKA_BROKERCONNECT: "kafka-skd:9092"
+
+
+networks:
+  skd-net:
+    driver: bridge
