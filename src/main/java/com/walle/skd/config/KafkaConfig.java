@@ -20,10 +20,10 @@ import org.springframework.kafka.core.ProducerFactory;
 @Configuration
 public class KafkaConfig {
 
-    @Value(value = "${spring.kafka.bootstrap_server})")
+    @Value(value = "${spring.kafka.bootstrap_server}")
     private String bootstrapServer;
 
-    @Value(value = "${spring.kafka.group_id})")
+    @Value(value = "${spring.kafka.group_id}")
     private String groupId;
 
 
