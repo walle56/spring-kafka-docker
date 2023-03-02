@@ -15,5 +15,6 @@ public class Car {
     private String type;
     private int productionYear;
     private String ownerName;
+    private String plateNumber;
 
 }

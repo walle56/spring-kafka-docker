@@ -2,6 +2,6 @@ package com.walle.skd.handler;
 
 class MessageConsumerTest {
 
-    // TODO cover MessageConsumer class with tests
+    // TODO cover ListenerForSkdTopic1 class with the tests
 
 }

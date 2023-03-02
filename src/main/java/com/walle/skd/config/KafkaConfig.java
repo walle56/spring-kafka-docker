@@ -17,6 +17,9 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
+/**
+ * Configuration class specific to the Kafka
+ */
 @Configuration
 public class KafkaConfig {
 
@@ -26,6 +29,8 @@ public class KafkaConfig {
     @Value(value = "${spring.kafka.group_id}")
     private String groupId;
 
+    @Value(value = "${spring.kafka.topic}")
+    private String topic;
 
     // Message Producer beans
     @Bean
@@ -64,9 +69,9 @@ public class KafkaConfig {
         return factory;
     }
 
-    // Create Topic "SKD-Topic1"
+    // Create new Kafka Topic
     @Bean
     public NewTopic topic() {
-        return new NewTopic("SKD-Topic1", 1, (short) 1);
+        return new NewTopic(topic, 1, (short) 1);
     }
 }

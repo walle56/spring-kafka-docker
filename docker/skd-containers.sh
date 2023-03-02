@@ -53,7 +53,7 @@ while test $# -gt 0; do
       shift
       ;;
     -zk)
-      echo ' ** DOCKER ZOOKEEPER '
+      echo ' ** DOCKER ZOOKEEPER AND KAFKA'
       f-common-params-run "$zk_var"
       shift
       ;;

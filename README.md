@@ -1,6 +1,6 @@
 ## Example of how to configure Spring Boot application with Kafka in docker
 
-###`It is still under development`
+### `It is still under development`
 
 ### Description:
 This project has example of producer and consumer for Kafka messages using Spring framework      
@@ -17,6 +17,6 @@ It has examples of how to:
 -- docker and docker-compose
 
 ### Run the project:
--- use docker/skd-containers.sh script to run zookeeper and kafka dockers  
+-- use docker/skd-containers.sh script to run zookeeper and kafka dockers `./skd-containers.sh -c up -zk`  
 -- compile the code with `mvn clean install`  
 -- run Spring Boot application with `mvn spring-boot:run`

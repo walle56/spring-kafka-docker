@@ -10,13 +10,13 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 /**
  * Class for sending message to specific Kafka Topic
  */
-public class MessageProducer {
+public class MessageSender {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MessageProducer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MessageSender.class);
 
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    public MessageProducer(KafkaTemplate<String, String> kafkaTemplate) {
+    public MessageSender(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
