@@ -13,7 +13,7 @@ It has examples of how to:
 
 ### Preconditions:
 -- AdoptOpenJDK 11  
--- Maven 3.8.x
+-- Maven 3.8.x  
 -- docker and docker-compose
 
 ### Run the project:
