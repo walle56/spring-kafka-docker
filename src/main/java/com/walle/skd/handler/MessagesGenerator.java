@@ -38,7 +38,7 @@ public class MessagesGenerator {
         exec.scheduleAtFixedRate(() -> {
 
             try {
-                Car car = new Car("Superior", "TypeA", 2030, "Me", "AA" + new Random().nextInt(6));
+                Car car = new Car("Superior", "TypeA", 2030, "Me", "AA" + new Random().nextInt(99));
                 messageSender.send(topic, OBJECT_WRITER.writeValueAsString(car));
             } catch (Exception e) {
                 LOG.error("Error while sending the message to Kafka", e);

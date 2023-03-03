@@ -21,19 +21,19 @@ public class MessageSender {
     }
 
     public void send(String topic, String json) {
-        LOG.info("Sending message to the Topic {}, message body {}", topic, json);
+        LOG.debug("Sending message to the Topic {}, message body {}", topic, json);
         ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, json);
 
         future.addCallback(new ListenableFutureCallback<>() {
 
             @Override
             public void onSuccess(SendResult<String, String> result) {
-                LOG.info("Successfully sent message={} with offset={}", json, result.getRecordMetadata().offset());
+                LOG.info("Successfully sent message {} with offset={}", json, result.getRecordMetadata().offset());
             }
 
             @Override
             public void onFailure(Throwable ex) {
-                LOG.error("Failed to to send message={}", json, ex);
+                LOG.error("Failed to to send message {}", json, ex);
             }
         });
     }
